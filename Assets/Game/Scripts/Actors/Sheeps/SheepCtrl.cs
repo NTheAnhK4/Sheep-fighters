@@ -10,6 +10,7 @@ public class SheepCtrl : ParentBehavior
     [SerializeField] private BoxCollider2D collid;
     [SerializeField] private Rigidbody2D rigid;
     [SerializeField] private Vector3 direction;
+    [SerializeField] private string sheepName;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float sheepWeight;
     [SerializeField] private float damage;
@@ -23,18 +24,21 @@ public class SheepCtrl : ParentBehavior
 
     public float Damage => damage;
 
-    public void Init(Vector3 direct, float speed, float weight,float _damage, string initAnim, IBehavior behavior = null)
+    public AnimCtrl AnimCtrl => animCtrl;
+
+    public void Init(Vector3 direct, SheepParam sheepParam, string initAnim, IBehavior behavior = null)
     {
         LoadAnimCtrl();
         this.direction = direct;
-        this.moveSpeed = speed;
-        this.sheepWeight = weight;
-        this.damage = _damage;
+        this.moveSpeed = sheepParam.speed;
+        this.sheepWeight = sheepParam.weight;
+        this.damage = sheepParam.damage;
+        this.sheepName = sheepParam.name;
         curBehavior = behavior ?? new MoveHandler();
-        curBehavior.Enter(this);
-        animCtrl.ChangeAnim(initAnim);
+        ChangeAnim(initAnim);
         LoadCollid();
         LoadRigid();
+        curBehavior.Enter(this);
     }
 
     private void LoadAnimCtrl()
@@ -57,16 +61,9 @@ public class SheepCtrl : ParentBehavior
         rigid.freezeRotation = true;
     }
 
-    protected override void LoadComponent()
+    public void ChangeAnim(string animName)
     {
-        base.LoadComponent();
-        Vector2 direct =  Vector2.left;
-        
-        if (gameObject.tag.Equals("Player"))
-        {
-            direct = Vector2.right;
-        }
-        Init(direct, 2f, 20,3,"YoungWhiteSheepMove");
+        animCtrl.ChangeAnim(sheepName.Replace(" ", "") + animName);
     }
 
     public void ChangeBehavior(IBehavior newBehavior)

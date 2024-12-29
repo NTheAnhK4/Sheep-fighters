@@ -46,5 +46,6 @@ public static class ObserverManager
 public enum EventId
 {
     AttackPlayer,
-    AttackEnemy
+    AttackEnemy,
+    PlayerSheepPosition
 }

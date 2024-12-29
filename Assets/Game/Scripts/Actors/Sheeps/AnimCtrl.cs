@@ -7,8 +7,16 @@ using UnityEngine.Animations;
 public class AnimCtrl : ChildBehavior
 {
     [SerializeField] private Animator anim;
+
     
-    
+    public void FlipAnim(bool isFacingRight)
+    {
+        Vector3 curScalse = transform.localScale;
+        if (curScalse.x > 0 && !isFacingRight || (curScalse.x < 0 && isFacingRight))
+        {
+            transform.localScale = new Vector3(curScalse.x * -1, curScalse.y, curScalse.z);
+        }
+    }
     protected override void LoadComponent()
     {
         base.LoadComponent();

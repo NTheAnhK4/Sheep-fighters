@@ -29,4 +29,19 @@ public class CastleCtrl : ParentBehavior
         });
        
     }
+
+    private void OnDisable()
+    {
+        EventId eventId = EventId.AttackEnemy;
+        if (transform.tag.Equals("Player")) eventId = EventId.AttackPlayer;
+        ObserverManager.Detach(eventId, param =>
+        {
+            if (param is not float)
+            {
+                Debug.Log("Wrong param to castle ctrl");
+                return;
+            }
+            health?.TakeDamage((float)param);
+        });
+    }
 }

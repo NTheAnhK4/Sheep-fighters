@@ -9,7 +9,7 @@ public class Singleton<T> : ParentBehavior where T : ParentBehavior
 
     public static T Instance => instance;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         if (instance != null)
         {
