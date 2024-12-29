@@ -18,3 +18,8 @@ MonoBehaviour:
     speed: 1
     weight: 10
     prefab: {fileID: 7500742537529242689, guid: 8ffac9306ea3cfe448f9371c77894bab, type: 3}
+  - name: Black Sheep
+    damage: 3
+    speed: 0.6
+    weight: 9
+    prefab: {fileID: 8439438695184522363, guid: 4db801adae5a968459806cf8d26f41d2, type: 3}
