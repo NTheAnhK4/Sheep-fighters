@@ -50,6 +50,8 @@ public class SheepCtrl : ParentBehavior
     {
         if(collid != null) return;
         collid = transform.GetComponent<BoxCollider2D>();
+        collid.offset = new Vector2(0.05f, 0);
+        collid.size = new Vector2(1.2f, 0.25f);
     }
 
     private void LoadRigid()
